@@ -7,7 +7,7 @@ def hello():
     return "Hello, World!"
 
 @mcp.resource("greeting://dhdsbhsbhfjkh")
-def hello():
+def maduro():
     return "Hello, dfsffsfffs!"
 
 mcp.run(transport="stdio")

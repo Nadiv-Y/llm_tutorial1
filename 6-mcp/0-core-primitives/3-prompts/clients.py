@@ -1,7 +1,6 @@
-
 import asyncio
 import sys
-from mcp.client.stdio  import stdio_client
+from mcp.client.stdio import stdio_client
 from mcp import ClientSession, StdioServerParameters
 from pathlib import Path
 
@@ -9,7 +8,7 @@ async def main():
     server_script = Path(__file__).parent / "server.py"
     
     server_params = StdioServerParameters(
-        command=sys.executable  ,
+        command=sys.executable,
         args=[str(server_script)]
     )
 
@@ -17,16 +16,14 @@ async def main():
         async with ClientSession(reader, writer) as session:
             await session.initialize()
             
-            resources = await session.list_resources()
+            prompts = await session.list_prompts()
 
-            print(resources)
+            print(prompts)
             
             
-            for r in resources.resources:
-                result = await session.read_resource(r.uri)
-                content = result.contents[0].text
-                print(content)
+            result = await session.get_prompt("translate_to_hebrew", arguments={"text": "Hello, World!"})
+            print("dhfkhfbeufheuhwu")
+            print(result)
                 
 
-if __name__ == "__main__":
-    asyncio.run(main())
+asyncio.run(main())
